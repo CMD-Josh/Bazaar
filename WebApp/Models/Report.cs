@@ -1,15 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebApp.Models
+﻿namespace WebApp.Models
 {
     public class Report
     {
-        public int reportID { get; set; }
-        [Required]
-        public User reportSentBy { get; set; } = default!;
-        [DataType(DataType.DateTime)]
-        public DateTime reportDate { get; set; } = DateTime.Now;
-        [Required]
-        public string reportDetails { get; set; } = default!;
+        public int Id { get; set; }
+        public DateTime CreationTime { get; set; } = DateTime.Now;
+        public string ReportDetails { get; set; }
+
+        public virtual User? UserReported { get; set; }
+        public virtual Listing? ListingReported { get; set; }
     }
 }

@@ -1,18 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebApp.Models
+﻿namespace WebApp.Models
 {
     public class Account
     {
-        public int accountID { get; set; }
+        public enum Role{
+            User, Admin
+        }
 
-        [DataType(DataType.EmailAddress)]
-        [Required]
-        public string email { get; set; }
-        [DataType(DataType.Password)]
-        [Required]
-        public string password { get; set; }
-        [Required]
-        public string role { get; set; }
+        public int AccountId { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public Role Type { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

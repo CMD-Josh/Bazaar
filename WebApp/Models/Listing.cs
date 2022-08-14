@@ -1,17 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebApp.Models
+﻿namespace WebApp.Models
 {
     public class Listing
     {
-        public int listingID { get; set; }
-        [Required]
-        [StringLength(50)]
-        public string listingName { get; set; } = default!;
-        [Required]
-        public User listingAuthor { get; set; } = default!;
-        [Required]
-        public List<Item> listingItems { get; set; } = default!;
-        public List<Report>? listingReports { get; set; } = default!;
+        public enum ListingType
+        {
+            Auction, Continuous
+        }
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public ListingType Type { get; set; }
+        public DateTime CreationTime { get; set; } = DateTime.Now;
+
+        public virtual User Author { get; set; }
+        public virtual List<Item> Items { get; set; }
+        public virtual List<Report>? Reports { get; set; }
+
     }
 }

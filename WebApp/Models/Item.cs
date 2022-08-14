@@ -1,21 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebApp.Models
+﻿namespace WebApp.Models
 {
     public class Item
     {
-        public int itemID { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string itemName { get; set; } = default!;
-        [Required]
-        public string itemDescription { get; set; } = default!;
-        [Required]
-        [DataType(DataType.Currency)]
-        public double price { get; set; }
-        public Listing listingHost { get; set; } = default!;
-        [Required]
-        public int quantity { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string ItemDesc { get; set; }
+        public double Price { get; set; }
 
+        public virtual Listing Listing { get; set; }
     }
 }
