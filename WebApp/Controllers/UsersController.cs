@@ -25,21 +25,24 @@ namespace WebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            if (_context.User == null)
-            {
-                return NotFound();
-            }
-            return await _context.User.ToListAsync();
+          if (_context.User == null)
+          {
+              return NotFound();
+          }
+            return await _context.User
+                .Include(a => a.Account)
+                .Include(l => l.Listings)
+                .ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            if (_context.User == null)
-            {
-                return NotFound();
-            }
+          if (_context.User == null)
+          {
+              return NotFound();
+          }
             var user = await _context.User.FindAsync(id);
 
             if (user == null)
@@ -86,10 +89,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            if (_context.User == null)
-            {
-                return Problem("Entity set 'BazaarContext.User'  is null.");
-            }
+          if (_context.User == null)
+          {
+              return Problem("Entity set 'BazaarContext.User'  is null.");
+          }
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 

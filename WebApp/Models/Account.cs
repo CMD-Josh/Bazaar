@@ -1,4 +1,6 @@
-﻿namespace WebApp.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebApp.Models
 {
     public class Account
     {
@@ -6,11 +8,9 @@
             User, Admin
         }
 
-        public int AccountId { get; set; }
+        public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public Role Type { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

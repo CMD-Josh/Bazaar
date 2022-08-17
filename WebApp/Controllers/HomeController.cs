@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using WebApp.Data;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -7,15 +9,21 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BazaarContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BazaarContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            if(_context.Listing != null)
+            {
+                return View(await _context.Listing.Include(a => a.Author).ToListAsync());
+            }
+            return Problem("Entity set 'BazaarContext.Listing' is null");
         }
 
         public IActionResult Privacy()

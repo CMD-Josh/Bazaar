@@ -11,6 +11,7 @@ namespace WebApp.Models
         public string Avatar { get; set; }
 
         [ForeignKey("AccountId")]
+        public int AccountId { get; set; }
         public virtual Account Account { get; set; }
         public virtual List<Listing> Listings { get; set; }
         public virtual List<Report> Reports { get; set; }
